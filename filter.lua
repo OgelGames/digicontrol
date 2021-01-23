@@ -17,6 +17,15 @@ minetest.register_node("digicontrol:filter", {
 	paramtype2 = "facedir",
 	is_ground_content = false,
 	groups = {digicontrol = 1, dig_immediate = 2},
+	on_construct = function(pos)
+		minetest.get_meta(pos):set_string("formspec", "field[channel;Channel;${channel}]")
+	end,
+	on_receive_fields = function(pos, _, fields, sender)
+		if minetest.is_protected(pos, sender:get_player_name()) then return end
+		if fields.channel then
+			minetest.get_meta(pos):set_string("channel", fields.channel)
+		end
+	end,
 	digiline = {
 		semiconductor = {
 			rules = function(node, pos, from, channel)
