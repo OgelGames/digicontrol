@@ -35,12 +35,23 @@ function digicontrol.get_side(pos, from, param2)
 	return ((facedir - param2) + 4) % 4
 end
 
+function digicontrol.on_rotate(pos, node, _, mode, new_param2)
+	if mode ~= 1 then return false end
+	node.param2 = new_param2
+	minetest.swap_node(pos, node)
+	digilines.update_autoconnect(pos)
+	return true
+end
+
 local MP = minetest.get_modpath("digicontrol")
 
 -- Overrides to digilines functions
 dofile(MP.."/override.lua")
 
--- Nodes
+-- Compatibility for digiline_routing and digistuff
+dofile(MP.."/compatibility.lua")
+
+-- Digicontrol nodes
 dofile(MP.."/diode.lua")
 dofile(MP.."/splitter.lua")
 dofile(MP.."/trisplitter.lua")

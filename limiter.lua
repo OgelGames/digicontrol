@@ -17,6 +17,9 @@ minetest.register_node("digicontrol:limiter", {
 	paramtype2 = "facedir",
 	is_ground_content = false,
 	groups = {digicontrol = 1, dig_immediate = 2},
+	on_rotate = digicontrol.on_rotate,
+	after_place_node = digilines.update_autoconnect,
+	after_destruct = digilines.update_autoconnect,
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", "field[limit;Message Limit (messages/second);${limit}]")

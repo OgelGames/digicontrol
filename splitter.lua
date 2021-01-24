@@ -17,6 +17,9 @@ minetest.register_node("digicontrol:splitter", {
 	paramtype2 = "facedir",
 	is_ground_content = false,
 	groups = {digicontrol = 1, dig_immediate = 2},
+	on_rotate = digicontrol.on_rotate,
+	after_place_node = digilines.update_autoconnect,
+	after_destruct = digilines.update_autoconnect,
 	digiline = {
 		semiconductor = {
 			rules = function(node, pos, from)
