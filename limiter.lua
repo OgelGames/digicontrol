@@ -1,9 +1,9 @@
 
-minetest.register_node("digicontrol:filter", {
-	description = "Digilines Filter",
-	inventory_image = "digicontrol_filter.png",
+minetest.register_node("digicontrol:limiter", {
+	description = "Digilines Limiter",
+	inventory_image = "digicontrol_limiter.png",
 	tiles = {
-		"digicontrol_filter.png",
+		"digicontrol_limiter.png",
 		"digicontrol_bottom.png",
 		"digicontrol_side_port.png",
 		"digicontrol_side_port.png",
@@ -18,19 +18,28 @@ minetest.register_node("digicontrol:filter", {
 	is_ground_content = false,
 	groups = {digicontrol = 1, dig_immediate = 2},
 	on_construct = function(pos)
-		minetest.get_meta(pos):set_string("formspec", "field[channel;Channel;${channel}]")
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", "field[limit;Message Limit (messages/second);${limit}]")
+		meta:set_string("limit", "1")
 	end,
 	on_receive_fields = function(pos, _, fields, sender)
 		if minetest.is_protected(pos, sender:get_player_name()) then return end
-		if fields.channel then
-			minetest.get_meta(pos):set_string("channel", fields.channel)
+		if fields.limit then
+			local limit = tonumber(fields.limit)
+			if limit then
+				minetest.get_meta(pos):set_string("limit", math.min(limit, 10))
+			end
 		end
 	end,
 	digiline = {
 		semiconductor = {
-			rules = function(node, pos, _, channel)
-				local setchannel = minetest.get_meta(pos):get_string("channel")
-				if channel ~= setchannel then return {} end
+			rules = function(node, pos)
+				local timer = minetest.get_node_timer(pos)
+				local limit = tonumber(minetest.get_meta(pos):get_string("limit"))
+				if not limit or limit == 0 or timer:is_started() then return {} end
+				if limit > 0 then
+					timer:start(1 / limit)
+				end
 				return {
 					digicontrol.get_rule(1, node.param2),
 					digicontrol.get_rule(3, node.param2)

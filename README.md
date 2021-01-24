@@ -7,11 +7,11 @@ Adds nodes to control the flow of digiline messages.
 
 ## TODO
 
-- limiter and router
+- router (sorting tube for digiline messages)
 - crossing and double corner insulated wires
 - compatibility for replacing `digiline_routing`
 - craft recipes
-- isulated wires from `digistuff` (when not installed)
+- insulated wires from `digistuff` (when not installed)
 
 ## License
 
