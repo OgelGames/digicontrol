@@ -33,7 +33,7 @@ minetest.register_node("digicontrol:filter", {
 		semiconductor = {
 			rules = function(node, pos, _, channel)
 				local setchannel = minetest.get_meta(pos):get_string("channel")
-				if channel ~= setchannel then return {} end
+				if setchannel ~= "" and channel ~= setchannel then return {} end
 				return {
 					digicontrol.get_rule(1, node.param2),
 					digicontrol.get_rule(3, node.param2)

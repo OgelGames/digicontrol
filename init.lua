@@ -48,7 +48,7 @@ local MP = minetest.get_modpath("digicontrol")
 -- Overrides to digilines functions
 dofile(MP.."/override.lua")
 
--- Compatibility for digiline_routing and digistuff
+-- Compatibility for replacing digiline_routing
 dofile(MP.."/compatibility.lua")
 
 -- Digicontrol nodes
