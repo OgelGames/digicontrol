@@ -8,7 +8,6 @@ Adds nodes to control the flow of digiline messages.
 ## TODO
 
 - router (sorting tube for digiline messages)
-- craft recipes
 
 ## License
 

@@ -58,3 +58,7 @@ dofile(MP.."/trisplitter.lua")
 dofile(MP.."/filter.lua")
 dofile(MP.."/limiter.lua")
 --dofile(MP.."/router.lua")
+
+-- Crafting recipes
+dofile(MP.."/crafts.lua")
+
