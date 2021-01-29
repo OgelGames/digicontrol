@@ -5,10 +5,6 @@
 
 Adds nodes to control the flow of digiline messages.
 
-## TODO
-
-- router (sorting tube for digiline messages)
-
 ## License
 
 Except for any exceptions stated in [LICENSE.md](LICENSE.md#exceptions), all code is licensed under the [MIT License](LICENSE.md#mit-license), with all textures, models, sounds, and other media licensed under the [CC BY-SA 4.0 License](LICENSE.md#cc-by-sa-40-license). 

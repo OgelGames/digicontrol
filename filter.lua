@@ -21,7 +21,7 @@ minetest.register_node("digicontrol:filter", {
 	after_place_node = digilines.update_autoconnect,
 	after_destruct = digilines.update_autoconnect,
 	on_construct = function(pos)
-		minetest.get_meta(pos):set_string("formspec", "field[channel;Digiline Channel;${channel}]")
+		minetest.get_meta(pos):set_string("formspec", "field[channel;Channel filter (empty for any);${channel}]")
 	end,
 	on_receive_fields = function(pos, _, fields, sender)
 		if minetest.is_protected(pos, sender:get_player_name()) then return end
