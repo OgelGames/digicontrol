@@ -16,7 +16,7 @@
 
 This mod adds nodes to control the flow of digiline messages in various ways, and is designed to be a more streamlined replacement for [`digiline_routing`](https://github.com/numberZero/digiline_routing).
 
-![Overview Screenshot](screenshots/overview.png?raw=true "Overview Screenshot") 
+![Overview Screenshot](images/overview.png?raw=true "Overview Screenshot") 
 
 ## Nodes
 
