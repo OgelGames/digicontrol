@@ -2,6 +2,7 @@
 
 [![luacheck](https://github.com/OgelGames/digicontrol/workflows/luacheck/badge.svg)](https://github.com/OgelGames/digicontrol/actions)
 [![License](https://img.shields.io/badge/License-MIT%20and%20CC%20BY--SA%204.0-green.svg)](LICENSE.md)
+[![Minetest](https://img.shields.io/badge/Minetest-5.0+-blue.svg)](https://www.minetest.net)
 
 ## Table of Contents
 
@@ -39,7 +40,7 @@ This mod adds nodes to control the flow of digiline messages in various ways, an
 
 ## Installation
 
-Download the [master branch](https://github.com/OgelGames/digicontrol/archive/master.zip) or the [latest release](https://github.com/OgelGames/digicontrol/releases), or clone the repository using Git or the [GitHub Desktop](https://desktop.github.com/) app, and follow [these instructions](https://dev.minetest.net/Installing_Mods).
+Download the [master branch](https://github.com/OgelGames/digicontrol/archive/master.zip) or the [latest release](https://github.com/OgelGames/digicontrol/releases), or clone the repository using Git or the [GitHub Desktop](https://desktop.github.com/) app, and follow [the usual installation steps](https://dev.minetest.net/Installing_Mods).
 
 ## License
 
