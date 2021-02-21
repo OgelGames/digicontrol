@@ -12,19 +12,17 @@ if not minetest.get_modpath("digiline_routing") then
 		label = "Digicontrol digiline_routing compatibility",
 		name = "digicontrol:routing_compat",
 		nodenames = {
-			"digiline_routing:filter",
-			"digiline_routing:splitter",
 			"digiline_routing:filter_b",
 			"digiline_routing:splitter_b"
 		},
 		action = function(pos, node)
+			local pos2 = vector.subtract(pos, minetest.facedir_to_dir(node.param2))
+			local node2 = minetest.get_node(pos2)
 			local p = (node.param2 + 1) % 4
-			-- For some reason the node name will be the aliased one...
-			if node.name == "digicontrol:splitter" or node.name == "digicontrol:filter" then
-				minetest.swap_node(pos, {name = node.name, param2 = p})
-			else
-				minetest.swap_node(pos, {name = connector, param2 = p})
-			end
+			-- Replace invisible node
+			minetest.set_node(pos, {name = connector, param2 = p})
+			-- Rotate main node
+			minetest.swap_node(pos2, {name = node2.name, param2 = p})
 		end
 	})
 end
