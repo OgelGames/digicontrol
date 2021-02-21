@@ -24,24 +24,31 @@ minetest.register_node("digicontrol:limiter", {
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", "field[limit;Message Limit (messages/second);${limit}]")
 		meta:set_string("limit", "1")
+		meta:set_string("messages", "0")
 	end,
 	on_receive_fields = function(pos, _, fields, sender)
 		if minetest.is_protected(pos, sender:get_player_name()) then return end
 		if fields.limit then
 			local limit = tonumber(fields.limit)
 			if limit then
-				minetest.get_meta(pos):set_string("limit", math.min(limit, 10))
+				minetest.get_meta(pos):set_string("limit", math.floor(limit + 0.5))
 			end
 		end
+	end,
+	on_timer = function(pos)
+		minetest.get_meta(pos):set_string("messages", "0")
 	end,
 	digiline = {
 		semiconductor = {
 			rules = function(node, pos)
-				local timer = minetest.get_node_timer(pos)
-				local limit = tonumber(minetest.get_meta(pos):get_string("limit"))
-				if not limit or limit == 0 or timer:is_started() then return {} end
+				local meta = minetest.get_meta(pos)
+				local limit = tonumber(meta:get_string("limit")) or 0
+				local msgs = tonumber(meta:get_string("messages")) or 0
+				if limit == 0 or (limit > 0 and msgs >= limit) then return {} end
 				if limit > 0 then
-					timer:start(1 / limit)
+					meta:set_string("messages", msgs + 1)
+					local timer = minetest.get_node_timer(pos)
+					if not timer:is_started() then timer:start(1) end
 				end
 				return {
 					digicontrol.get_rule(1, node.param2),
