@@ -8,6 +8,7 @@
 
 - [Overview](#overview)
 - [Nodes](#nodes)
+- [Usage](#usage)
 - [Dependencies](#dependencies)
 - [Installation](#installation)
 - [License](#license)
@@ -25,6 +26,18 @@ This mod adds nodes to control the flow of digiline messages in various ways, an
 - **Diode** - only lets messages pass through in one direction.
 - **Splitter** - splits messages into two branches, and stops messages going between the branches.
 - **Tri-Splitter** - same as Splitter, but splits into three branches.
+
+## Usage
+
+Digicontrol nodes are designed to be as simple to use as possible. The Diode, Splitter, and Tri-Splitter are similar to mesecons logic gates; they work without any setup.
+
+The Filter can be right-clicked to set the channel it will filter. If left blank it will allow all messages to pass through, if a channel is specified, it will only let messages on that channel through, blocking all others.
+
+![Filter Formspec](images/filter_formspec.png?raw=true "Filter Formspec")
+
+The Limiter can also be right-clicked to set the rate at which messages can pass through. A value of 1 or higher will allow that number of messages to pass through per second, blocking further messages. A value of 0 blocks all messages, and a value of -1 allows an infinite number of messages.
+
+![Limiter Formspec](images/limiter_formspec.png?raw=true "Limiter Formspec")
 
 ## Dependencies
 
