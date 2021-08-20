@@ -3,6 +3,7 @@
 [![luacheck](https://github.com/OgelGames/digicontrol/workflows/luacheck/badge.svg)](https://github.com/OgelGames/digicontrol/actions)
 [![License](https://img.shields.io/badge/License-MIT%20and%20CC%20BY--SA%204.0-green.svg)](LICENSE.md)
 [![Minetest](https://img.shields.io/badge/Minetest-5.0+-blue.svg)](https://www.minetest.net)
+[![ContentDB](https://content.minetest.net/packages/OgelGames/digicontrol/shields/downloads/)](https://content.minetest.net/packages/OgelGames/digicontrol/)
 
 ## Table of Contents
 
