@@ -54,7 +54,9 @@ The Limiter can also be right-clicked to set the rate at which messages can pass
 
 ## Installation
 
-Download the [master branch](https://github.com/OgelGames/digicontrol/archive/master.zip) or the [latest release](https://github.com/OgelGames/digicontrol/releases), or clone the repository using Git or the [GitHub Desktop](https://desktop.github.com/) app, and follow [the usual installation steps](https://dev.minetest.net/Installing_Mods).
+Download the [master branch](https://github.com/OgelGames/digicontrol/archive/master.zip) or the [latest release](https://github.com/OgelGames/digicontrol/releases), and follow [the usual installation steps](https://dev.minetest.net/Installing_Mods).
+
+Alternatively, you can download and install the mod from [ContentDB](https://content.minetest.net/packages/OgelGames/digicontrol) or the online content tab in Minetest.
 
 ## License
 
