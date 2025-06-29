@@ -32,7 +32,7 @@ This mod adds nodes to control the flow of digiline messages in various ways, an
 
 Digicontrol nodes are designed to be as simple to use as possible. The Diode, Splitter, and Tri-Splitter are similar to mesecons logic gates; they work without any setup.
 
-The Filter can be right-clicked to set the channel it will filter. If left blank it will allow all messages to pass through, if a channel is specified, it will only let messages on that channel through, blocking all others.
+The Filter can be right-clicked to set the channel it will filter. If left blank it will allow all messages to pass through, if a channel is specified, it will only let messages on that channel through, blocking all others. You can also use "?" to optionally match the start or end, for example `abc?` will match channels starting with "abc". 
 
 ![Filter Formspec](images/filter_formspec.png?raw=true "Filter Formspec")
 

@@ -1,4 +1,18 @@
 
+local function match_channel(channel, filter)
+	if filter == "" then return true end
+	local match_start = filter:sub(-1) == "?"
+	local match_end = filter:sub(1, 1) == "?"
+	if match_start and match_end then
+		return channel:find(filter:sub(2, -2), 1, true)
+	elseif match_start then
+		return channel:sub(1, #filter-1) == filter:sub(1, -2)
+	elseif match_end then
+		return channel:sub(-#filter+1) == filter:sub(2)
+	end
+	return channel == filter
+end
+
 minetest.register_node("digicontrol:filter", {
 	description = "Digilines Filter",
 	inventory_image = "digicontrol_filter.png",
@@ -32,8 +46,8 @@ minetest.register_node("digicontrol:filter", {
 	digiline = {
 		semiconductor = {
 			rules = function(node, pos, _, channel)
-				local setchannel = minetest.get_meta(pos):get_string("channel")
-				if setchannel ~= "" and channel ~= setchannel then return {} end
+				local filter = minetest.get_meta(pos):get_string("channel")
+				if not match_channel(channel, filter) then return {} end
 				return {
 					digicontrol.get_rule(1, node.param2),
 					digicontrol.get_rule(3, node.param2)
