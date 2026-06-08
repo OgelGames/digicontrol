@@ -23,37 +23,43 @@ minetest.register_node("digicontrol:limiter", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", "field[limit;Message Limit (messages/second);${limit}]")
-		meta:set_string("limit", "1")
-		meta:set_string("messages", "0")
+		meta:set_int("limit", "1")
 	end,
 	on_receive_fields = function(pos, _, fields, sender)
 		if minetest.is_protected(pos, sender:get_player_name()) then return end
 		if fields.limit then
-			local limit = tonumber(fields.limit)
-			if limit then
-				minetest.get_meta(pos):set_string("limit", math.floor(limit + 0.5))
-			end
+			local limit = tonumber(fields.limit) or 1
+			if limit < -1 then limit = -1 end
+			local meta = minetest.get_meta(pos)
+			meta:set_int("limit", math.floor(limit))
+			meta:set_string("messages", "")
 		end
-	end,
-	on_timer = function(pos)
-		minetest.get_meta(pos):set_string("messages", "0")
 	end,
 	digiline = {
 		semiconductor = {
 			rules = function(node, pos)
-				local meta = minetest.get_meta(pos)
-				local limit = tonumber(meta:get_string("limit")) or 0
-				local msgs = tonumber(meta:get_string("messages")) or 0
-				if limit == 0 or (limit > 0 and msgs >= limit) then return {} end
-				if limit > 0 then
-					meta:set_string("messages", msgs + 1)
-					local timer = minetest.get_node_timer(pos)
-					if not timer:is_started() then timer:start(1) end
-				end
-				return {
+				local rules = {
 					digicontrol.get_rule(1, node.param2),
 					digicontrol.get_rule(3, node.param2)
 				}
+				local meta = minetest.get_meta(pos)
+				local limit = meta:get_int("limit")
+				if limit > 0 then
+					local now = os.time()
+					local msgs = meta:get_string("messages"):split(",")
+					for i=#msgs, 1, -1 do
+						if tonumber(msgs[i]) < now then msgs[i] = nil end
+					end
+					if #msgs < limit then
+						msgs[#msgs+1] = now
+					else
+						rules = {}
+					end
+					meta:set_string("messages", table.concat(msgs, ","))
+				elseif limit == 0 then
+					rules = {}
+				end
+				return rules
 			end
 		},
 		wire = {
