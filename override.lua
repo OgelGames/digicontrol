@@ -26,7 +26,7 @@ local function queue_dequeue(queue)
 end
 
 function digilines.transmit(pos, channel, msg, checked, origin)
-	local checkedID = minetest.hash_node_position(pos)
+	local checkedID = core.hash_node_position(pos)
 	if checked[checkedID] or not origin then
 		return
 	end
@@ -56,7 +56,7 @@ function digilines.transmit(pos, channel, msg, checked, origin)
 				for _, rule in ipairs(rules) do
 					local nextPos = vector.add(curPos, rule)
 					if digilines.rules_link(curPos, nextPos) then
-						checkedID = minetest.hash_node_position(nextPos)
+						checkedID = core.hash_node_position(nextPos)
 						if not checked[checkedID] then
 							checked[checkedID] = true
 							queue_enqueue(queue, {nextPos, curPos})
@@ -72,7 +72,7 @@ end
 
 function digilines.receptor_send(pos, rules, channel, msg)
 	local checked = {}
-	checked[minetest.hash_node_position(pos)] = true -- exclude itself
+	checked[core.hash_node_position(pos)] = true -- exclude itself
 	for _,rule in ipairs(rules) do
 		if digilines.rules_link(pos, vector.add(pos, rule)) then
 			digilines.transmit(vector.add(pos, rule), channel, msg, checked, pos)

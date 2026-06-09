@@ -1,5 +1,5 @@
 
-minetest.register_node("digicontrol:limiter", {
+core.register_node("digicontrol:limiter", {
 	description = "Digilines Limiter",
 	inventory_image = "digicontrol_limiter.png",
 	tiles = {
@@ -21,16 +21,16 @@ minetest.register_node("digicontrol:limiter", {
 	after_place_node = digilines.update_autoconnect,
 	after_destruct = digilines.update_autoconnect,
 	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		meta:set_string("formspec", "field[limit;Message Limit (messages/second);${limit}]")
 		meta:set_int("limit", "1")
 	end,
 	on_receive_fields = function(pos, _, fields, sender)
-		if minetest.is_protected(pos, sender:get_player_name()) then return end
+		if core.is_protected(pos, sender:get_player_name()) then return end
 		if fields.limit then
 			local limit = tonumber(fields.limit) or 1
 			if limit < -1 then limit = -1 end
-			local meta = minetest.get_meta(pos)
+			local meta = core.get_meta(pos)
 			meta:set_int("limit", math.floor(limit))
 			meta:set_string("messages", "")
 		end
@@ -42,7 +42,7 @@ minetest.register_node("digicontrol:limiter", {
 					digicontrol.get_rule(1, node.param2),
 					digicontrol.get_rule(3, node.param2)
 				}
-				local meta = minetest.get_meta(pos)
+				local meta = core.get_meta(pos)
 				local limit = meta:get_int("limit")
 				if limit > 0 then
 					local now = os.time()

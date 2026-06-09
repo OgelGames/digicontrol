@@ -31,19 +31,19 @@ end
 function digicontrol.get_side(pos, from, param2)
 	if param2 >= 4 then return nil end
 	local dir = vector.subtract(from, pos)
-	local facedir = minetest.dir_to_facedir(dir)
+	local facedir = core.dir_to_facedir(dir)
 	return ((facedir - param2) + 4) % 4
 end
 
 function digicontrol.on_rotate(pos, node, _, mode, new_param2)
 	if mode ~= 1 then return false end
 	node.param2 = new_param2
-	minetest.swap_node(pos, node)
+	core.swap_node(pos, node)
 	digilines.update_autoconnect(pos)
 	return true
 end
 
-local MP = minetest.get_modpath("digicontrol")
+local MP = core.get_modpath("digicontrol")
 
 -- Overrides to digilines functions
 dofile(MP.."/override.lua")

@@ -1,7 +1,7 @@
 
 local function get_craftitem(items)
 	for _,item in ipairs(items) do
-		if minetest.registered_items[item] then
+		if core.registered_items[item] then
 			return item
 		end
 	end
@@ -26,7 +26,7 @@ local ic = get_craftitem({
 	"default:mese_crystal_fragment"
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "digicontrol:diode",
 	recipe = {
 		{"", "", ""},
@@ -35,7 +35,7 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "digicontrol:splitter",
 	recipe = {
 		{"", "", digiwire},
@@ -44,7 +44,7 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "digicontrol:trisplitter",
 	recipe = {
 		{"", "", digiwire},
@@ -53,7 +53,7 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "digicontrol:limiter",
 	recipe = {
 		{"", "", ""},
@@ -62,7 +62,7 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "digicontrol:filter",
 	recipe = {
 		{"", "", ""},

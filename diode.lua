@@ -1,5 +1,5 @@
 
-minetest.register_node("digicontrol:diode", {
+core.register_node("digicontrol:diode", {
 	description = "Digilines Diode",
 	inventory_image = "digicontrol_diode.png",
 	tiles = {

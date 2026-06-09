@@ -13,7 +13,7 @@ local function match_channel(channel, filter)
 	return channel == filter
 end
 
-minetest.register_node("digicontrol:filter", {
+core.register_node("digicontrol:filter", {
 	description = "Digilines Filter",
 	inventory_image = "digicontrol_filter.png",
 	tiles = {
@@ -35,18 +35,18 @@ minetest.register_node("digicontrol:filter", {
 	after_place_node = digilines.update_autoconnect,
 	after_destruct = digilines.update_autoconnect,
 	on_construct = function(pos)
-		minetest.get_meta(pos):set_string("formspec", "field[channel;Channel Filter (empty for any);${channel}]")
+		core.get_meta(pos):set_string("formspec", "field[channel;Channel Filter (empty for any);${channel}]")
 	end,
 	on_receive_fields = function(pos, _, fields, sender)
-		if minetest.is_protected(pos, sender:get_player_name()) then return end
+		if core.is_protected(pos, sender:get_player_name()) then return end
 		if fields.channel then
-			minetest.get_meta(pos):set_string("channel", fields.channel)
+			core.get_meta(pos):set_string("channel", fields.channel)
 		end
 	end,
 	digiline = {
 		semiconductor = {
 			rules = function(node, pos, _, channel)
-				local filter = minetest.get_meta(pos):get_string("channel")
+				local filter = core.get_meta(pos):get_string("channel")
 				if not match_channel(channel, filter) then return {} end
 				return {
 					digicontrol.get_rule(1, node.param2),

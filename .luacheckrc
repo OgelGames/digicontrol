@@ -5,6 +5,6 @@ globals = {
 }
 
 read_globals = {
-	"minetest",
+	"core",
 	"vector",
 }

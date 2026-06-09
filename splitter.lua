@@ -1,5 +1,5 @@
 
-minetest.register_node("digicontrol:splitter", {
+core.register_node("digicontrol:splitter", {
 	description = "Digilines Splitter",
 	inventory_image = "digicontrol_splitter.png",
 	tiles = {
